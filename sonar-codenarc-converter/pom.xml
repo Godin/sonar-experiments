@@ -33,6 +33,11 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-nop</artifactId>
+      <version>1.5.6</version>
+    </dependency>
+    <dependency>
       <groupId>org.codehaus.sonar</groupId>
       <artifactId>sonar-plugin-api</artifactId>
       <version>${sonar.version}</version>
@@ -41,7 +46,7 @@
     <dependency>
       <groupId>org.codenarc</groupId>
       <artifactId>CodeNarc</artifactId>
-      <version>0.13</version>
+      <version>0.14</version>
       <exclusions>
         <exclusion>
           <groupId>log4j</groupId>

@@ -79,6 +79,7 @@ public class Converter {
         params.add(param);
       }
     }
+
     String[] params2 = StringUtils.substringsBetween(description, "<em>", "</em> property");
     if (params2 != null) {
       params.addAll(Arrays.asList(params2));
@@ -189,15 +190,27 @@ public class Converter {
     converter.rule(org.codenarc.rule.basic.ReturnFromFinallyBlockRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.basic.ReturnsNullInsteadOfEmptyArrayRule.class, VERSION_0_11);
     converter.rule(org.codenarc.rule.basic.ReturnsNullInsteadOfEmptyCollectionRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.SerialVersionUIDRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.SerializableClassMustDefineSerialVersionUIDRule.class, VERSION_0_13);
+    // removed in 0.14
+    // converter.rule(org.codenarc.rule.basic.SerialVersionUIDRule.class, VERSION_0_11);
+    // converter.rule(org.codenarc.rule.basic.SerializableClassMustDefineSerialVersionUIDRule.class, VERSION_0_13);
     converter.rule(org.codenarc.rule.basic.SimpleDateFormatMissingLocaleRule.class, VERSION_0_12);
     converter.rule(org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule.class, VERSION_0);
 
+    converter.rule(org.codenarc.rule.basic.ExplicitLinkedHashMapInstantiationRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.basic.DuplicateMapKeyRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.basic.DuplicateSetValueRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.basic.EqualsOverloadedRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.basic.ForLoopShouldBeWhileLoopRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.basic.ClosureAsLastMethodParameterRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.basic.ClassForNameRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.basic.ComparisonOfTwoConstantsRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.basic.ComparisonWithSelfRule.class, VERSION_0_14);
+
     // new ruleset in 0.14 - serialization
-    // converter.startSet("serialization");
-    // converter.rule(org.codenarc.rule.serialization.SerialVersionUIDRule.class, VERSION_0_11);
-    // converter.rule(org.codenarc.rule.serialization.SerializableClassMustDefineSerialVersionUIDRule.class, VERSION_0_13);
+    converter.startSet("serialization");
+    converter.rule(org.codenarc.rule.serialization.SerialVersionUIDRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.serialization.SerializableClassMustDefineSerialVersionUIDRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.serialization.SerialPersistentFieldsRule.class, VERSION_0_14);
 
     converter.startSet("braces");
     converter.rule(org.codenarc.rule.braces.IfStatementBracesRule.class, VERSION_0);
@@ -230,6 +243,9 @@ public class Converter {
     converter.rule(org.codenarc.rule.concurrency.VolatileLongOrDoubleFieldRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.concurrency.WaitOutsideOfWhileLoopRule.class, VERSION_0_13);
 
+    converter.rule(org.codenarc.rule.concurrency.StaticConnectionRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.concurrency.StaticSimpleDateFormatFieldRule.class, VERSION_0_14);
+
     converter.startSet("design");
     converter.rule(org.codenarc.rule.design.AbstractClassWithoutAbstractMethodRule.class, VERSION_0_12);
     converter.rule(org.codenarc.rule.design.CloseWithoutCloseableRule.class, VERSION_0_12);
@@ -237,6 +253,10 @@ public class Converter {
     converter.rule(org.codenarc.rule.design.EmptyMethodInAbstractClassRule.class, VERSION_0_12);
     converter.rule(org.codenarc.rule.design.ImplementationAsTypeRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.design.FinalClassWithProtectedMemberRule.class, VERSION_0_12);
+
+    converter.rule(org.codenarc.rule.design.PublicInstanceFieldRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.design.StatelessSingletonRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.design.AbstractClassWithPublicConstructorRule.class, VERSION_0_14);
 
     converter.startSet("dry");
     converter.rule(org.codenarc.rule.dry.DuplicateNumberLiteralRule.class, VERSION_0_11);
@@ -260,12 +280,15 @@ public class Converter {
     converter.rule(org.codenarc.rule.exceptions.ThrowNullPointerExceptionRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.exceptions.ThrowRuntimeExceptionRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.exceptions.ThrowThrowableRule.class, VERSION_0);
+    converter.rule(org.codenarc.rule.exceptions.SwallowThreadDeathRule.class, VERSION_0_14);
 
     converter.startSet("generic");
     converter.rule(org.codenarc.rule.generic.IllegalRegexRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.generic.RequiredRegexRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.generic.RequiredStringRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.generic.StatelessClassRule.class, VERSION_0);
+
+    converter.rule(org.codenarc.rule.generic.IllegalPackageReferenceRule.class, VERSION_0_14);
 
     converter.startSet("grails");
     converter.rule(org.codenarc.rule.grails.GrailsPublicControllerMethodRule.class, VERSION_0);
@@ -278,6 +301,9 @@ public class Converter {
     converter.rule(org.codenarc.rule.imports.ImportFromSamePackageRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.imports.UnnecessaryGroovyImportRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.imports.UnusedImportRule.class, VERSION_0);
+
+    converter.rule(org.codenarc.rule.imports.ImportFromSunPackagesRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.imports.MisorderedStaticImportsRule.class, VERSION_0_14);
 
     converter.startSet("junit");
     converter.rule(org.codenarc.rule.junit.ChainedTestRule.class, VERSION_0_13);
@@ -299,6 +325,8 @@ public class Converter {
     converter.rule(org.codenarc.rule.junit.JUnitFailWithoutMessageRule.class, VERSION_0_11);
     converter.rule(org.codenarc.rule.junit.JUnitTestMethodWithoutAssertRule.class, VERSION_0_12);
     converter.rule(org.codenarc.rule.junit.UnnecessaryFailRule.class, VERSION_0_13);
+
+    converter.rule(org.codenarc.rule.junit.SpockIgnoreRestUsedRule.class, VERSION_0_14);
 
     converter.startSet("logging");
     converter.rule(org.codenarc.rule.logging.LoggerForDifferentClassRule.class, VERSION_0_12);
@@ -364,6 +392,11 @@ public class Converter {
     converter.rule(org.codenarc.rule.unnecessary.UnnecessaryTernaryExpressionRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.unnecessary.UnnecessaryTransientModifierRule.class, VERSION_0_13);
 
+    converter.rule(org.codenarc.rule.unnecessary.UnnecessaryFinalOnPrivateMethodRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.unnecessary.UnnecessaryElseStatementRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.unnecessary.UnnecessaryParenthesesForMethodCallWithClosureRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.unnecessary.UnnecessaryPackageReferenceRule.class, VERSION_0_14);
+
     converter.startSet("unused");
     converter.rule(org.codenarc.rule.unused.UnusedArrayRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.unused.UnusedObjectRule.class, VERSION_0);
@@ -371,6 +404,22 @@ public class Converter {
     converter.rule(org.codenarc.rule.unused.UnusedPrivateMethodParameterRule.class, VERSION_0_12);
     converter.rule(org.codenarc.rule.unused.UnusedPrivateMethodRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.unused.UnusedVariableRule.class, VERSION_0);
+
+    // new ruleset in 0.14 - jdbc
+    converter.startSet("jdbc");
+    converter.rule(org.codenarc.rule.jdbc.DirectConnectionManagementRule.class, VERSION_0_14);
+
+    // new ruleset in 0.14 - security
+    converter.startSet("security");
+    converter.rule(org.codenarc.rule.security.NonFinalSubclassOfSensitiveInterfaceRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.security.InsecureRandomRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.security.FileCreateTempFileRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.security.SystemExitRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.security.ObjectFinalizeRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.security.JavaIoPackageAccessRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.security.UnsafeArrayDeclarationRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.security.PublicFinalizeMethodRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.security.NonFinalPublicFieldRule.class, VERSION_0_14);
 
     converter.end();
 
