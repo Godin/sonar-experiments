@@ -11,6 +11,9 @@ class UnderscoresInNumericLiterals {
 
     float pi = 3.14_15F;
 
+    double exp = 1_234e1_0;
+    double maxDouble = 0x1.ffff_ffff_ffff_fP1_023;
+
     // cannot put underscores adjacent to a decimal point
     // float pi1 = 3_.1415F;
 
