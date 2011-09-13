@@ -19,13 +19,18 @@
  */
 package org.sonar.plugins.groovy.codenarc;
 
+import java.io.File;
+import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Properties;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.codenarc.rule.AbstractRule;
-
-import java.io.File;
-import java.io.PrintStream;
-import java.util.*;
 
 public class Converter {
 
@@ -85,6 +90,18 @@ public class Converter {
       params.addAll(Arrays.asList(params2));
     }
 
+    String[] params3 = StringUtils.substringsBetween(description, "configured in <em>", "</em>");
+    if (params3 != null) {
+      params.addAll(Arrays.asList(params3));
+    }
+
+    if (StringUtils.contains(description, "length property")) {
+      params.add("length");
+    }
+    if (StringUtils.contains(description, "sameLine property")) {
+      params.add("sameLine");
+    }
+
     // output
     if (since != null) {
       out.println("  <!-- since " + since + " -->");
@@ -126,6 +143,7 @@ public class Converter {
   private static final String VERSION_0_12 = "0.12";
   private static final String VERSION_0_13 = "0.13";
   private static final String VERSION_0_14 = "0.14";
+  private static final String VERSION_0_15 = "0.15";
 
   public static void main(String[] args) throws Exception {
     Converter converter = new Converter();
@@ -205,6 +223,13 @@ public class Converter {
     converter.rule(org.codenarc.rule.basic.ClassForNameRule.class, VERSION_0_14);
     converter.rule(org.codenarc.rule.basic.ComparisonOfTwoConstantsRule.class, VERSION_0_14);
     converter.rule(org.codenarc.rule.basic.ComparisonWithSelfRule.class, VERSION_0_14);
+
+    converter.rule(org.codenarc.rule.basic.AssignCollectionUniqueRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.basic.AssignCollectionSortRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.basic.BitwiseOperatorInConditionalRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.basic.HardcodedWindowsRootDirectoryRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.basic.HardCodedWindowsFileSeparatorRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.basic.RandomDoubleCoercedToZeroRule.class, VERSION_0_15);
 
     // new ruleset in 0.14 - serialization
     converter.startSet("serialization");
@@ -290,11 +315,16 @@ public class Converter {
 
     converter.rule(org.codenarc.rule.generic.IllegalPackageReferenceRule.class, VERSION_0_14);
 
+    converter.rule(org.codenarc.rule.generic.IllegalClassReferenceRule.class, VERSION_0_15);
+
     converter.startSet("grails");
     converter.rule(org.codenarc.rule.grails.GrailsPublicControllerMethodRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.grails.GrailsSessionReferenceRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.grails.GrailsServletContextReferenceRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.grails.GrailsStatelessServiceRule.class, VERSION_0);
+
+    converter.rule(org.codenarc.rule.grails.GrailsDomainHasToStringRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.grails.GrailsDomainHasEqualsRule.class, VERSION_0_15);
 
     converter.startSet("imports");
     converter.rule(org.codenarc.rule.imports.DuplicateImportRule.class, VERSION_0);
@@ -397,6 +427,11 @@ public class Converter {
     converter.rule(org.codenarc.rule.unnecessary.UnnecessaryParenthesesForMethodCallWithClosureRule.class, VERSION_0_14);
     converter.rule(org.codenarc.rule.unnecessary.UnnecessaryPackageReferenceRule.class, VERSION_0_14);
 
+    converter.rule(org.codenarc.rule.unnecessary.UnnecessaryDefInVariableDeclarationRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.unnecessary.UnnecessaryDotClassRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.unnecessary.UnnecessaryInstanceOfCheckRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.unnecessary.UnnecessarySubstringRule.class, VERSION_0_15);
+
     converter.startSet("unused");
     converter.rule(org.codenarc.rule.unused.UnusedArrayRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.unused.UnusedObjectRule.class, VERSION_0);
@@ -409,6 +444,10 @@ public class Converter {
     converter.startSet("jdbc");
     converter.rule(org.codenarc.rule.jdbc.DirectConnectionManagementRule.class, VERSION_0_14);
 
+    converter.rule(org.codenarc.rule.jdbc.JdbcConnectionReferenceRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.jdbc.JdbcResultSetReferenceRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.jdbc.JdbcStatementReferenceRule.class, VERSION_0_15);
+
     // new ruleset in 0.14 - security
     converter.startSet("security");
     converter.rule(org.codenarc.rule.security.NonFinalSubclassOfSensitiveInterfaceRule.class, VERSION_0_14);
@@ -420,6 +459,16 @@ public class Converter {
     converter.rule(org.codenarc.rule.security.UnsafeArrayDeclarationRule.class, VERSION_0_14);
     converter.rule(org.codenarc.rule.security.PublicFinalizeMethodRule.class, VERSION_0_14);
     converter.rule(org.codenarc.rule.security.NonFinalPublicFieldRule.class, VERSION_0_14);
+
+    // new ruleset in 0.15 - formatting
+    converter.startSet("formatting");
+    converter.rule(org.codenarc.rule.formatting.BracesForClassRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.formatting.LineLengthRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.formatting.BracesForForLoopRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.formatting.BracesForIfElseRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.formatting.BracesForMethodRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.formatting.BracesForTryCatchFinallyRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.formatting.ClassJavadocRule.class, VERSION_0_15);
 
     converter.end();
 
