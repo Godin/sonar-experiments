@@ -1,0 +1,22 @@
+apply plugin: "java"
+apply plugin: "sonar"
+
+buildDir = "target"
+
+repositories {
+  mavenCentral()
+}
+
+configurations {
+  jacoco
+}
+
+dependencies {
+  testCompile group: "junit", name: "junit", version: "4.8.1"
+
+  jacoco group: "org.jacoco", name: "org.jacoco.agent", version: "0.5.3.201107060350", classifier: "runtime"
+}
+
+test {
+  jvmArgs "-javaagent:" + configurations.jacoco.asPath + "=destfile=" + buildDir + "/jacoco.exec,includes=example.*"
+}
