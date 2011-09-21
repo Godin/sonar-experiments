@@ -12,9 +12,12 @@ class TryWithResources {
       }
     }
 
+    try (FileInputStream in = new FileInputStream("foo.txt");) {}
+
     // multiple resources
-    try (FileInputStream in = new FileInputStream("foo.txt"); FileOutputStream out = new FileOutputStream("bar.txt")) {
-    }
+    try (FileInputStream in = new FileInputStream("foo.txt"); FileOutputStream out = new FileOutputStream("bar.txt")) {}
+
+    try (FileInputStream in = new FileInputStream("foo.txt"); FileOutputStream out = new FileOutputStream("bar.txt");) {}
   }
 
 }
