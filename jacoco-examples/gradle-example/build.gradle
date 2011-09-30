@@ -20,3 +20,11 @@ dependencies {
 test {
   jvmArgs "-javaagent:" + configurations.jacoco.asPath + "=destfile=" + buildDir + "/jacoco.exec,includes=example.*"
 }
+
+sonar {
+  project {
+    withProjectProperties { props ->
+      props["sonar.core.codeCoveragePlugin"] = "jacoco"
+    }
+  }
+}
