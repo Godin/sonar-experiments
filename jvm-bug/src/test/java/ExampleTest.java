@@ -17,7 +17,10 @@ public class ExampleTest {
   public void test() throws Exception {
     printOpenFileDescriptorCount();
 
-    File workDir = new File("./target/work");
+    File workDir;
+    String workDirProperty = System.getProperty("workdir");
+    workDir = workDirProperty == null ? new File("./target/work") : new File(workDirProperty);
+    System.out.println("Work dir: " + workDir);
     FileUtils.deleteDirectory(workDir);
     workDir.mkdirs();
 
