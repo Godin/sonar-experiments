@@ -6,6 +6,7 @@ import java.net.URLClassLoader;
 import javax.management.*;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 public class ExampleTest {
@@ -35,7 +36,7 @@ public class ExampleTest {
       );
 
       InputStream stream = cl.getResourceAsStream("org/junit/Test.class");
-      stream.close();
+      IOUtils.closeQuietly(stream);
     }
   }
 
@@ -47,8 +48,8 @@ public class ExampleTest {
     while ((len = in.read(buf)) > 0) {
       out.write(buf, 0, len);
     }
-    in.close();
-    out.close();
+    IOUtils.closeQuietly(in);
+    IOUtils.closeQuietly(out);
   }
 
   private static void printOpenFileDescriptorCount() {
