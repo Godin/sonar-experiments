@@ -11,11 +11,12 @@ import org.junit.Test;
 
 public class ExampleTest {
 
-  private static int ITERATIONS = 1024;
-
   @Test
   public void test() throws Exception {
     printOpenFileDescriptorCount();
+
+    String iterationsProperty = System.getProperty("iters");
+    int iterations = iterationsProperty == null ? 1024 : Integer.parseInt(iterationsProperty);
 
     File workDir;
     String workDirProperty = System.getProperty("workdir");
@@ -27,7 +28,7 @@ public class ExampleTest {
     // some jar-file with a content
     File origin = new File(getClass().getClassLoader().loadClass("org.junit.Test").getProtectionDomain().getCodeSource().getLocation().getPath());
 
-    for (int i = 0; i < ITERATIONS; i++) {
+    for (int i = 0; i < iterations; i++) {
       printOpenFileDescriptorCount();
 
       File dest = new File(workDir, i + ".jar");
