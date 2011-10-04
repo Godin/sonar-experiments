@@ -1,16 +1,11 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.channels.FileChannel;
 
 import javax.management.*;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 public class ExampleTest {
@@ -38,28 +33,22 @@ public class ExampleTest {
           new URL[] { dest.toURL() },
           null // we don't use parent ClassLoader to enforce loading from newly created jar-file
       );
-      IOUtils.closeQuietly(cl.getResourceAsStream("org/junit/Test.class"));
+
+      InputStream stream = cl.getResourceAsStream("org/junit/Test.class");
+      stream.close();
     }
   }
 
   private static void copyFile(File sourceFile, File destFile) throws IOException {
-    if (!destFile.exists()) {
-      destFile.createNewFile();
+    InputStream in = new FileInputStream(sourceFile);
+    OutputStream out = new FileOutputStream(destFile);
+    byte[] buf = new byte[1024];
+    int len;
+    while ((len = in.read(buf)) > 0) {
+      out.write(buf, 0, len);
     }
-    FileChannel source = null;
-    FileChannel destination = null;
-    try {
-      source = new FileInputStream(sourceFile).getChannel();
-      destination = new FileOutputStream(destFile).getChannel();
-      destination.transferFrom(source, 0, source.size());
-    } finally {
-      if (source != null) {
-        source.close();
-      }
-      if (destination != null) {
-        destination.close();
-      }
-    }
+    in.close();
+    out.close();
   }
 
   private static void printOpenFileDescriptorCount() {
