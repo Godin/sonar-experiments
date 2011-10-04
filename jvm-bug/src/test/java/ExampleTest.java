@@ -1,7 +1,11 @@
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.channels.FileChannel;
 
 import javax.management.*;
 
@@ -19,6 +23,7 @@ public class ExampleTest {
 
     File workDir = new File("./target/work");
     FileUtils.deleteDirectory(workDir);
+    workDir.mkdirs();
 
     // some jar-file with a content
     File origin = new File(getClass().getClassLoader().loadClass("org.junit.Test").getProtectionDomain().getCodeSource().getLocation().getPath());
@@ -27,13 +32,33 @@ public class ExampleTest {
       printOpenFileDescriptorCount();
 
       File dest = new File(workDir, i + ".jar");
-      FileUtils.copyFile(origin, dest);
+      copyFile(origin, dest);
 
       ClassLoader cl = new URLClassLoader(
           new URL[] { dest.toURL() },
           null // we don't use parent ClassLoader to enforce loading from newly created jar-file
       );
       IOUtils.closeQuietly(cl.getResourceAsStream("org/junit/Test.class"));
+    }
+  }
+
+  private static void copyFile(File sourceFile, File destFile) throws IOException {
+    if (!destFile.exists()) {
+      destFile.createNewFile();
+    }
+    FileChannel source = null;
+    FileChannel destination = null;
+    try {
+      source = new FileInputStream(sourceFile).getChannel();
+      destination = new FileOutputStream(destFile).getChannel();
+      destination.transferFrom(source, 0, source.size());
+    } finally {
+      if (source != null) {
+        source.close();
+      }
+      if (destination != null) {
+        destination.close();
+      }
     }
   }
 
