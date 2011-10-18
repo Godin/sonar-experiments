@@ -7,10 +7,12 @@ import javax.management.*;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class ExampleTest {
 
+  @Ignore
   @Test
   public void test() throws Exception {
     printOpenFileDescriptorCount();
