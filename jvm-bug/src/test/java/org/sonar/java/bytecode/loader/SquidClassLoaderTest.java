@@ -42,7 +42,7 @@ public class SquidClassLoaderTest {
     System.out.println(classLoader.loadClass("org.junit.Test"));
     InputStream is = classLoader.getResourceAsStream("org/junit/Test.class");
     System.out.println(is);
-    file.delete();
+    // file.delete();
     IOUtils.closeQuietly(is);
   }
 
