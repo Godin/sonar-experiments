@@ -38,8 +38,10 @@ public class SquidClassLoaderTest {
   @Test
   public void testUrlClassLoader() throws Exception {
     File file = getTempFile();
-    URLClassLoader classLoader = new URLClassLoader(new URL[] { file.toURL() });
+    URLClassLoader classLoader = new URLClassLoader(new URL[] { file.toURI().toURL() });
+    System.out.println(classLoader.loadClass("org.junit.Test"));
     InputStream is = classLoader.getResourceAsStream("org/junit/Test.class");
+    System.out.println(is);
     file.delete();
     IOUtils.closeQuietly(is);
   }
