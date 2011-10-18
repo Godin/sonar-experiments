@@ -40,9 +40,9 @@ public class SquidClassLoaderTest {
     File file = getTempFile();
     URLClassLoader classLoader = new URLClassLoader(new URL[] { file.toURI().toURL() });
     System.out.println(classLoader.loadClass("org.junit.Test"));
-    InputStream is = classLoader.getResourceAsStream("org/junit/Test.class");
+    InputStream is = classLoader.getResourceAsStream("BadName");
     System.out.println(is);
-    // file.delete();
+    file.delete();
     IOUtils.closeQuietly(is);
   }
 
