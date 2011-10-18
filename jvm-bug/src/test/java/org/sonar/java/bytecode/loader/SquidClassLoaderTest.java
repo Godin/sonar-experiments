@@ -35,8 +35,8 @@ public class SquidClassLoaderTest {
     File file = getTempFile();
     URLClassLoader classLoader = new URLClassLoader(new URL[] { file.toURL() });
     InputStream is = classLoader.getResourceAsStream("org/junit/Test.class");
-    IOUtils.closeQuietly(is);
     file.delete();
+    IOUtils.closeQuietly(is);
   }
 
 }
