@@ -17,6 +17,9 @@ public class SquidClassLoaderTest {
     File srcFile = new File(getClass().getClassLoader().loadClass("org.junit.Test").getProtectionDomain().getCodeSource().getLocation().getPath());
     File tempFile = File.createTempFile("test", "jar");
     FileUtils.copyFile(srcFile, tempFile);
+
+    System.out.println(tempFile);
+
     return tempFile;
   }
 
