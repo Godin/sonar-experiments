@@ -11,6 +11,8 @@
 
   <properties>
     <sonar.dynamicAnalysis>false</sonar.dynamicAnalysis>
+    <sonar.java.source>1.7</sonar.java.source>
+    <sonar.java.target>1.7</sonar.java.target>
   </properties>
 
   <build>
