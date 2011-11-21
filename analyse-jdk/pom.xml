@@ -31,7 +31,7 @@
             </goals>
             <configuration>
               <target>
-                <get src="http://hg.openjdk.java.net/jdk7/jdk7/jdk/archive/tip.zip" dest="src.zip"/>
+                <get src="http://hg.openjdk.java.net/jdk7u/jdk7u/jdk/archive/tip.zip" dest="src.zip"/>
                 <unzip src="src.zip" dest="src">
                   <patternset>
                     <include name="*/src/share/classes/**"/>
