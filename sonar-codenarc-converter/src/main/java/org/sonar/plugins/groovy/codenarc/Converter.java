@@ -144,23 +144,17 @@ public class Converter {
   private static final String VERSION_0_13 = "0.13";
   private static final String VERSION_0_14 = "0.14";
   private static final String VERSION_0_15 = "0.15";
+  private static final String VERSION_0_16 = "0.16";
 
   public static void main(String[] args) throws Exception {
     Converter converter = new Converter();
     converter.start();
 
     converter.startSet("basic");
-    converter.rule(org.codenarc.rule.basic.AddEmptyStringRule.class, VERSION_0_13);
     converter.rule(org.codenarc.rule.basic.AssignmentInConditionalRule.class, VERSION_0_13);
     converter.rule(org.codenarc.rule.basic.BigDecimalInstantiationRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.basic.BooleanGetBooleanRule.class, VERSION_0_13);
-    converter.rule(org.codenarc.rule.basic.BooleanMethodReturnsNullRule.class, VERSION_0_11);
     converter.rule(org.codenarc.rule.basic.BrokenOddnessCheckRule.class, VERSION_0_13);
-    converter.rule(org.codenarc.rule.basic.CloneableWithoutCloneRule.class, VERSION_0);
-    converter.rule(org.codenarc.rule.basic.ConfusingTernaryRule.class, VERSION_0_12);
-    converter.rule(org.codenarc.rule.basic.CompareToWithoutComparableRule.class, VERSION_0_12);
-    converter.rule(org.codenarc.rule.basic.ConsecutiveLiteralAppendsRule.class, VERSION_0_13);
-    converter.rule(org.codenarc.rule.basic.ConsecutiveStringConcatenationRule.class, VERSION_0_13);
     converter.rule(org.codenarc.rule.basic.ConstantIfExpressionRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.basic.ConstantTernaryExpressionRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.basic.DeadCodeRule.class, VERSION_0_11);
@@ -179,57 +173,28 @@ public class Converter {
     converter.rule(org.codenarc.rule.basic.EmptyTryBlockRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.basic.EmptyWhileStatementRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.basic.EqualsAndHashCodeRule.class, VERSION_0);
-    converter.rule(org.codenarc.rule.basic.ExplicitArrayListInstantiationRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitCallToAndMethodRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitCallToCompareToMethodRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitCallToDivMethodRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitCallToEqualsMethodRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitCallToGetAtMethodRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitCallToLeftShiftMethodRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitCallToMinusMethodRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitCallToMultiplyMethodRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitCallToModMethodRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitCallToOrMethodRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitCallToPlusMethodRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitCallToPowerMethodRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitCallToRightShiftMethodRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitCallToXorMethodRule.class, VERSION_0_11);
     converter.rule(org.codenarc.rule.basic.ExplicitGarbageCollectionRule.class, VERSION_0_12);
-    converter.rule(org.codenarc.rule.basic.ExplicitHashMapInstantiationRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitHashSetInstantiationRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitLinkedListInstantiationRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitStackInstantiationRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ExplicitTreeSetInstantiationRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.GroovyLangImmutableRule.class, VERSION_0_13);
-    converter.rule(org.codenarc.rule.basic.GStringAsMapKeyRule.class, VERSION_0_11);
     converter.rule(org.codenarc.rule.basic.IntegerGetIntegerRule.class, VERSION_0_13);
-    converter.rule(org.codenarc.rule.basic.InvertedIfElseRule.class, VERSION_0_11);
     converter.rule(org.codenarc.rule.basic.RemoveAllOnSelfRule.class, VERSION_0_11);
     converter.rule(org.codenarc.rule.basic.ReturnFromFinallyBlockRule.class, VERSION_0);
-    converter.rule(org.codenarc.rule.basic.ReturnsNullInsteadOfEmptyArrayRule.class, VERSION_0_11);
-    converter.rule(org.codenarc.rule.basic.ReturnsNullInsteadOfEmptyCollectionRule.class, VERSION_0_11);
     // removed in 0.14
     // converter.rule(org.codenarc.rule.basic.SerialVersionUIDRule.class, VERSION_0_11);
     // converter.rule(org.codenarc.rule.basic.SerializableClassMustDefineSerialVersionUIDRule.class, VERSION_0_13);
-    converter.rule(org.codenarc.rule.basic.SimpleDateFormatMissingLocaleRule.class, VERSION_0_12);
     converter.rule(org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule.class, VERSION_0);
 
-    converter.rule(org.codenarc.rule.basic.ExplicitLinkedHashMapInstantiationRule.class, VERSION_0_14);
     converter.rule(org.codenarc.rule.basic.DuplicateMapKeyRule.class, VERSION_0_14);
     converter.rule(org.codenarc.rule.basic.DuplicateSetValueRule.class, VERSION_0_14);
     converter.rule(org.codenarc.rule.basic.EqualsOverloadedRule.class, VERSION_0_14);
     converter.rule(org.codenarc.rule.basic.ForLoopShouldBeWhileLoopRule.class, VERSION_0_14);
-    converter.rule(org.codenarc.rule.basic.ClosureAsLastMethodParameterRule.class, VERSION_0_14);
     converter.rule(org.codenarc.rule.basic.ClassForNameRule.class, VERSION_0_14);
     converter.rule(org.codenarc.rule.basic.ComparisonOfTwoConstantsRule.class, VERSION_0_14);
     converter.rule(org.codenarc.rule.basic.ComparisonWithSelfRule.class, VERSION_0_14);
 
-    converter.rule(org.codenarc.rule.basic.AssignCollectionUniqueRule.class, VERSION_0_15);
-    converter.rule(org.codenarc.rule.basic.AssignCollectionSortRule.class, VERSION_0_15);
     converter.rule(org.codenarc.rule.basic.BitwiseOperatorInConditionalRule.class, VERSION_0_15);
-    converter.rule(org.codenarc.rule.basic.HardcodedWindowsRootDirectoryRule.class, VERSION_0_15);
     converter.rule(org.codenarc.rule.basic.HardCodedWindowsFileSeparatorRule.class, VERSION_0_15);
     converter.rule(org.codenarc.rule.basic.RandomDoubleCoercedToZeroRule.class, VERSION_0_15);
+
+    converter.rule(org.codenarc.rule.basic.HardCodedWindowsRootDirectoryRule.class, VERSION_0_15);
 
     // new ruleset in 0.14 - serialization
     converter.startSet("serialization");
@@ -272,6 +237,18 @@ public class Converter {
     converter.rule(org.codenarc.rule.concurrency.StaticSimpleDateFormatFieldRule.class, VERSION_0_14);
 
     converter.startSet("design");
+    // moved from basic in 0.16
+    converter.rule(org.codenarc.rule.design.BooleanMethodReturnsNullRule.class, VERSION_0_11);
+    // moved from basic in 0.16
+    converter.rule(org.codenarc.rule.design.CloneableWithoutCloneRule.class, VERSION_0);
+    // moved from basic in 0.16
+    converter.rule(org.codenarc.rule.design.CompareToWithoutComparableRule.class, VERSION_0_12);
+    // moved from basic in 0.16
+    converter.rule(org.codenarc.rule.design.ReturnsNullInsteadOfEmptyArrayRule.class, VERSION_0_11);
+    // moved from basic in 0.16
+    converter.rule(org.codenarc.rule.design.ReturnsNullInsteadOfEmptyCollectionRule.class, VERSION_0_11);
+    // moved from basic in 0.16
+    converter.rule(org.codenarc.rule.design.SimpleDateFormatMissingLocaleRule.class, VERSION_0_12);
     converter.rule(org.codenarc.rule.design.AbstractClassWithoutAbstractMethodRule.class, VERSION_0_12);
     converter.rule(org.codenarc.rule.design.CloseWithoutCloseableRule.class, VERSION_0_12);
     converter.rule(org.codenarc.rule.design.ConstantsOnlyInterfaceRule.class, VERSION_0_12);
@@ -283,9 +260,13 @@ public class Converter {
     converter.rule(org.codenarc.rule.design.StatelessSingletonRule.class, VERSION_0_14);
     converter.rule(org.codenarc.rule.design.AbstractClassWithPublicConstructorRule.class, VERSION_0_14);
 
+    converter.rule(org.codenarc.rule.design.BuilderMethodWithSideEffectsRule.class, VERSION_0_16);
+
     converter.startSet("dry");
     converter.rule(org.codenarc.rule.dry.DuplicateNumberLiteralRule.class, VERSION_0_11);
     converter.rule(org.codenarc.rule.dry.DuplicateStringLiteralRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.dry.DuplicateMapLiteralRule.class, VERSION_0_16);
+    converter.rule(org.codenarc.rule.dry.DuplicateListLiteralRule.class, VERSION_0_16);
 
     converter.startSet("exceptions");
     converter.rule(org.codenarc.rule.exceptions.CatchArrayIndexOutOfBoundsExceptionRule.class, VERSION_0_12);
@@ -381,6 +362,8 @@ public class Converter {
     converter.rule(org.codenarc.rule.naming.PropertyNameRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.naming.VariableNameRule.class, VERSION_0);
 
+    converter.rule(org.codenarc.rule.naming.FactoryMethodNameRule.class, VERSION_0_16);
+
     converter.startSet("size");
     converter.rule(org.codenarc.rule.size.AbcComplexityRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.size.ClassSizeRule.class, VERSION_0);
@@ -390,6 +373,12 @@ public class Converter {
     converter.rule(org.codenarc.rule.size.NestedBlockDepthRule.class, VERSION_0);
 
     converter.startSet("unnecessary");
+    // moved from basic in 0.16
+    converter.rule(org.codenarc.rule.unnecessary.AddEmptyStringRule.class, VERSION_0_13);
+    // moved from basic in 0.16
+    converter.rule(org.codenarc.rule.unnecessary.ConsecutiveLiteralAppendsRule.class, VERSION_0_13);
+    // moved from basic in 0.16
+    converter.rule(org.codenarc.rule.unnecessary.ConsecutiveStringConcatenationRule.class, VERSION_0_13);
     converter.rule(org.codenarc.rule.unnecessary.UnnecessaryBigDecimalInstantiationRule.class, VERSION_0_12);
     converter.rule(org.codenarc.rule.unnecessary.UnnecessaryBigIntegerInstantiationRule.class, VERSION_0_12);
     converter.rule(org.codenarc.rule.unnecessary.UnnecessaryBooleanExpressionRule.class, VERSION_0);
@@ -432,6 +421,8 @@ public class Converter {
     converter.rule(org.codenarc.rule.unnecessary.UnnecessaryInstanceOfCheckRule.class, VERSION_0_15);
     converter.rule(org.codenarc.rule.unnecessary.UnnecessarySubstringRule.class, VERSION_0_15);
 
+    converter.rule(org.codenarc.rule.unnecessary.UnnecessaryDefInFieldDeclarationRule.class, VERSION_0_16);
+
     converter.startSet("unused");
     converter.rule(org.codenarc.rule.unused.UnusedArrayRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.unused.UnusedObjectRule.class, VERSION_0);
@@ -439,6 +430,7 @@ public class Converter {
     converter.rule(org.codenarc.rule.unused.UnusedPrivateMethodParameterRule.class, VERSION_0_12);
     converter.rule(org.codenarc.rule.unused.UnusedPrivateMethodRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.unused.UnusedVariableRule.class, VERSION_0);
+    converter.rule(org.codenarc.rule.unused.UnusedMethodParameterRule.class, VERSION_0_16);
 
     // new ruleset in 0.14 - jdbc
     converter.startSet("jdbc");
@@ -469,6 +461,47 @@ public class Converter {
     converter.rule(org.codenarc.rule.formatting.BracesForMethodRule.class, VERSION_0_15);
     converter.rule(org.codenarc.rule.formatting.BracesForTryCatchFinallyRule.class, VERSION_0_15);
     converter.rule(org.codenarc.rule.formatting.ClassJavadocRule.class, VERSION_0_15);
+
+    // new ruleset in 0.16 - convention, rules moved from basic
+    converter.startSet("convention");
+    converter.rule(org.codenarc.rule.convention.ConfusingTernaryRule.class, VERSION_0_12);
+    converter.rule(org.codenarc.rule.convention.InvertedIfElseRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.convention.CouldBeElvisRule.class, VERSION_0_16);
+    converter.rule(org.codenarc.rule.convention.LongLiteralWithLowerCaseLRule.class, VERSION_0_16);
+
+    // new ruleset in 0.16 - groovyism, rules moved from basic
+    converter.startSet("groovyism");
+    converter.rule(org.codenarc.rule.groovyism.AssignCollectionSortRule.class, VERSION_0_16);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitArrayListInstantiationRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitCallToAndMethodRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitCallToCompareToMethodRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitCallToDivMethodRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitCallToEqualsMethodRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitCallToGetAtMethodRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitCallToLeftShiftMethodRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitCallToMinusMethodRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitCallToMultiplyMethodRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitCallToModMethodRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitCallToOrMethodRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitCallToPlusMethodRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitCallToPowerMethodRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitCallToRightShiftMethodRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitCallToXorMethodRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitHashMapInstantiationRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitHashSetInstantiationRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitLinkedListInstantiationRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitStackInstantiationRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitTreeSetInstantiationRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.GroovyLangImmutableRule.class, VERSION_0_13);
+    converter.rule(org.codenarc.rule.groovyism.GStringAsMapKeyRule.class, VERSION_0_11);
+    converter.rule(org.codenarc.rule.groovyism.ExplicitLinkedHashMapInstantiationRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.groovyism.ClosureAsLastMethodParameterRule.class, VERSION_0_14);
+    converter.rule(org.codenarc.rule.groovyism.AssignCollectionUniqueRule.class, VERSION_0_15);
+    converter.rule(org.codenarc.rule.groovyism.ConfusingMultipleReturnsRule.class, VERSION_0_16);
+    converter.rule(org.codenarc.rule.groovyism.GetterMethodCouldBePropertyRule.class, VERSION_0_16);
+    converter.rule(org.codenarc.rule.groovyism.UseCollectManyRule.class, VERSION_0_16);
+    converter.rule(org.codenarc.rule.groovyism.CollectAllIsDeprecatedRule.class, VERSION_0_16);
+    converter.rule(org.codenarc.rule.groovyism.UseCollectNestedRule.class, VERSION_0_16);
 
     converter.end();
 
