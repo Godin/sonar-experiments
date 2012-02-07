@@ -1,6 +1,5 @@
 package example3;
 
-@javax.annotation.ParametersAreNonnullByDefault
 public class Example {
 
   public void method(String s) {
