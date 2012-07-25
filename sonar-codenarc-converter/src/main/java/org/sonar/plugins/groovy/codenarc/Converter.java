@@ -19,18 +19,13 @@
  */
 package org.sonar.plugins.groovy.codenarc;
 
-import java.io.File;
-import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Properties;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.codenarc.rule.AbstractRule;
+
+import java.io.File;
+import java.io.PrintStream;
+import java.util.*;
 
 public class Converter {
 
@@ -145,6 +140,7 @@ public class Converter {
   private static final String VERSION_0_14 = "0.14";
   private static final String VERSION_0_15 = "0.15";
   private static final String VERSION_0_16 = "0.16";
+  private static final String VERSION_0_17 = "0.17";
 
   public static void main(String[] args) throws Exception {
     Converter converter = new Converter();
@@ -195,6 +191,10 @@ public class Converter {
     converter.rule(org.codenarc.rule.basic.RandomDoubleCoercedToZeroRule.class, VERSION_0_15);
 
     converter.rule(org.codenarc.rule.basic.HardCodedWindowsRootDirectoryRule.class, VERSION_0_15);
+
+    converter.rule(org.codenarc.rule.basic.AssertWithinFinallyBlockRule.class, VERSION_0_17);
+    converter.rule(org.codenarc.rule.basic.ConstantAssertExpressionRule.class, VERSION_0_17);
+    converter.rule(org.codenarc.rule.basic.BrokenNullCheckRule.class, VERSION_0_17);
 
     // new ruleset in 0.14 - serialization
     converter.startSet("serialization");
@@ -261,6 +261,8 @@ public class Converter {
     converter.rule(org.codenarc.rule.design.AbstractClassWithPublicConstructorRule.class, VERSION_0_14);
 
     converter.rule(org.codenarc.rule.design.BuilderMethodWithSideEffectsRule.class, VERSION_0_16);
+
+    converter.rule(org.codenarc.rule.design.PrivateFieldCouldBeFinalRule.class, VERSION_0_17);
 
     converter.startSet("dry");
     converter.rule(org.codenarc.rule.dry.DuplicateNumberLiteralRule.class, VERSION_0_11);
@@ -371,6 +373,7 @@ public class Converter {
     converter.rule(org.codenarc.rule.size.MethodCountRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.size.MethodSizeRule.class, VERSION_0);
     converter.rule(org.codenarc.rule.size.NestedBlockDepthRule.class, VERSION_0);
+    converter.rule(org.codenarc.rule.size.CrapMetricRule.class, VERSION_0_17);
 
     converter.startSet("unnecessary");
     // moved from basic in 0.16
@@ -468,6 +471,10 @@ public class Converter {
     converter.rule(org.codenarc.rule.convention.InvertedIfElseRule.class, VERSION_0_11);
     converter.rule(org.codenarc.rule.convention.CouldBeElvisRule.class, VERSION_0_16);
     converter.rule(org.codenarc.rule.convention.LongLiteralWithLowerCaseLRule.class, VERSION_0_16);
+    converter.rule(org.codenarc.rule.convention.ParameterReassignmentRule.class, VERSION_0_17);
+    converter.rule(org.codenarc.rule.convention.TernaryCouldBeElvisRule.class, VERSION_0_17);
+    converter.rule(org.codenarc.rule.convention.VectorIsObsoleteRule.class, VERSION_0_17);
+    converter.rule(org.codenarc.rule.convention.HashtableIsObsoleteRule.class, VERSION_0_17);
 
     // new ruleset in 0.16 - groovyism, rules moved from basic
     converter.startSet("groovyism");
