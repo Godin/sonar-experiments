@@ -1,0 +1,101 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.example</groupId>
+  <artifactId>example</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>sonar-server-quick-start</name>
+
+  <prerequisites>
+    <maven>2.2.1</maven>
+  </prerequisites>
+
+  <properties>
+    <sonar.runtimeVersion>3.1.1</sonar.runtimeVersion>
+  </properties>
+
+  <!--
+  mvn versions:use-next-releases -DgenerateBackupPoms=false
+  -->
+  <dependencies>
+    <dependency>
+      <groupId>org.codehaus.sonar-plugins.scm-activity</groupId>
+      <artifactId>sonar-scm-activity-plugin</artifactId>
+      <version>1.5</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.codehaus.sonar-plugins.javascript</groupId>
+      <artifactId>sonar-javascript-plugin</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.sonar-plugins.python</groupId>
+      <artifactId>sonar-python-plugin</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.sonar-plugins.flex</groupId>
+      <artifactId>sonar-flex-plugin</artifactId>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.sonar-plugins</groupId>
+      <artifactId>sonar-groovy-plugin</artifactId>
+      <version>0.6</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>2.4</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.sonar</groupId>
+          <artifactId>sonar-dev-maven-plugin</artifactId>
+          <version>1.6</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-plugins</id>
+            <phase>generate-test-resources</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>target/extensions/plugins</outputDirectory>
+              <excludeTransitive>true</excludeTransitive>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.sonar</groupId>
+        <artifactId>sonar-dev-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>start-sonar</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>start-war</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
